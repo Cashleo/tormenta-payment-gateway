@@ -46,7 +46,9 @@ add_filter( 'woocommerce_payment_gateways', 'tormenta_payment_gateway_add_to_woo
  */
 function tormenta_payment_init() {
 	// Check if WooCommerce is active
-	add_action( 'admin_notices', 'woocommerce_not_installed_notice' );
+	if ( ! class_exists( 'Woocommerce' ) ) {
+		add_action( 'admin_notices', 'woocommerce_not_installed_notice' );
+	}
 
 	require_once TORMENTA_DIR_PATH . 'includes/class-tormenta-pay.php';
 	require_once TORMENTA_DIR_PATH . 'includes/tormenta-checkout-page.php';
