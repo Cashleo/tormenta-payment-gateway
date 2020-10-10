@@ -72,7 +72,7 @@ function wc_tormenta_gateway_plugin_links( $links ) {
 
     // TODO: change the docs link for the plugin
 	$plugin_links = array(
-		'<a href="' . admin_url( 'admin.php?page=wc-settings&tab=checkout&section=tormenta_payment' ) . '">' . __( 'Configure Gateway', 'tormenta-pay-woo' ) . '</a>',
+		'<a href="' . admin_url( 'admin.php?page=wc-settings&tab=checkout' ) . '">' . __( 'Configure Gateway', 'tormenta-pay-woo' ) . '</a>',
 	);
 
 	return array_merge( $plugin_links, $links );
