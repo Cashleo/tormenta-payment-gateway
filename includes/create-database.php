@@ -1,4 +1,9 @@
 <?php
+
+global $tormenta_db_version;
+
+$tormenta_db_version = '1.0';
+
 /**
  * Function adds new database to WP.
  *
@@ -33,4 +38,6 @@ function tormenta_create_sms_database() {
 
     require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
     dbDelta( $sql );
+
+    add_option( 'tormenta_db_version', $tormenta_db_version );
 }
