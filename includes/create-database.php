@@ -39,5 +39,5 @@ function tormenta_create_sms_database() {
     require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
     dbDelta( $sql );
 
-    add_option( 'tormenta_db_version', $tormenta_db_version );
+    update_option( 'tormenta_db_version', $tormenta_db_version );
 }

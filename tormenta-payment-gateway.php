@@ -47,7 +47,7 @@ add_filter( 'woocommerce_payment_gateways', 'tormenta_payment_gateway_add_to_woo
 function tormenta_payment_init() {
 	require_once TORMENTA_DIR_PATH . 'includes/class-tormenta-pay.php';
 	require_once TORMENTA_DIR_PATH . 'includes/tormenta-checkout-page.php';
-	require_once TORMENTA_DIR_PATH . 'includes/tormenta-fields-valiadation.php';
+	require_once TORMENTA_DIR_PATH . 'includes/tormenta-enqueue.php';
 }
 
 /**

@@ -1,0 +1,6 @@
+.checkout.woocommerce-checkout.processing,
+.processing .blockOverlay {
+    background-image:url('processing.gif') !important;
+    background-position: center 30% !important;
+    background-repeat: no-repeat !important;
+}
