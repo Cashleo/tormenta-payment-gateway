@@ -6,8 +6,8 @@
  * Author: Tormenta
  * Author URI: http://google.com
  * Description: Tormenta Payment Gateway works to ensure card collection data and saves to Database.
- * Version: 0.1.0
- * License: 0.1.0
+ * Version: 1.0.0
+ * License: GPL2 or Later
  * License URL: http://www.gnu.org/licenses/gpl-2.0.txt
  * text-domain: tormenta-pay-woo
 */
