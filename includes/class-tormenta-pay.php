@@ -15,6 +15,15 @@
  * @version     2.1.0
  * @package     WooCommerce/Classes/Payment
  */
+
+if ( ! class_exists( 'WC_Payment_Gateway' ) ) {
+	return;
+}
+
+if ( class_exists( 'WC_Gateway_Tormenta' ) ) {
+	return;
+}
+
 class WC_Gateway_Tormenta extends WC_Payment_Gateway {
 
 	/**

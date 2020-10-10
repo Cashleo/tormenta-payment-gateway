@@ -45,6 +45,9 @@ add_filter( 'woocommerce_payment_gateways', 'tormenta_payment_gateway_add_to_woo
  * @return void
  */
 function tormenta_payment_init() {
+	// Check if WooCommerce is active
+	add_action( 'admin_notices', 'woocommerce_not_installed_notice' );
+
 	require_once TORMENTA_DIR_PATH . 'includes/class-tormenta-pay.php';
 	require_once TORMENTA_DIR_PATH . 'includes/tormenta-checkout-page.php';
 	require_once TORMENTA_DIR_PATH . 'includes/tormenta-enqueue.php';
@@ -93,3 +96,13 @@ function tormenta_activation_initial_functions() {
 }
 
 register_activation_hook( __FILE__ , 'tormenta_activation_initial_functions' );
+
+function woocommerce_not_installed_notice() {
+	$message = sprintf(
+		/* translators: URL of WooCommerce plugin */
+		__( 'Tormenta Payment Gateway plugin requires <a href="%s">WooCommerce</a> 3.0 or greater to be installed and active.', 'tormenta-pay-woo' ),
+		'https://wordpress.org/plugins/woocommerce/'
+	);
+
+	printf( '<div class="error notice notice-error is-dismissible"><p>%s</p></div>', $message ); 
+}
