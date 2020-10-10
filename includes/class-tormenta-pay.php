@@ -35,7 +35,6 @@ class WC_Gateway_Tormenta extends WC_Payment_Gateway {
 		$this->enable_for_virtual = $this->get_option( 'enable_for_virtual', 'yes' ) === 'yes';
 
 		add_action( 'woocommerce_update_options_payment_gateways_' . $this->id, array( $this, 'process_admin_options' ) );
-		add_action( 'woocommerce_thankyou_' . $this->id, array( $this, 'thankyou_page' ) );
 		add_filter( 'woocommerce_payment_complete_order_status', array( $this, 'change_payment_complete_order_status' ), 10, 3 );
 
 		// Customer Emails.
@@ -184,16 +183,6 @@ class WC_Gateway_Tormenta extends WC_Payment_Gateway {
 	}
 
 	/**
-	 * Output for the order received page.
-	 */
-	public function thankyou_page() {
-		if ( $this->instructions ) {
-			echo wp_kses_post( wpautop( wptexturize( $this->instructions ) ) );
-			wc_add_notice( wptexturize( $this->instructions ), 'error' );
-		}
-	}
-
-	/**
 	 * Change payment complete order status to completed for COD orders.
 	 *
 	 * @since  3.1.0
@@ -222,3 +211,14 @@ class WC_Gateway_Tormenta extends WC_Payment_Gateway {
 		}
 	}
 }
+
+/**
+ * Output for the order received page.
+ */
+function tormenta_pay_thank_you_title( $thank_you_title, $order ){
+	
+	printf( __('<p style="padding: 10px 20px; border-color: red!important; background-color: red!important; color: white!important;">%s</p>', 'tormenta-pay-woo'), wptexturize( get_option( 'woocommerce_tormenta_settings' )['instructions'] ) );
+	
+}
+
+add_filter( 'woocommerce_thankyou_order_received_text', 'tormenta_pay_thank_you_title', 20, 2 );
