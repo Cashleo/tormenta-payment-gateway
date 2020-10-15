@@ -31,7 +31,7 @@ if( ! defined( 'TORMENTA_DIR_PATH' ) ) {
 }
 
 if( ! defined( 'TORMENTA_PLUGIN_URL' ) ) {
-	define( 'TORMENTA_PLUGIN_URL', WP_PLUGIN_URL . '/tormenta-payment-gateway/' );
+	define( 'TORMENTA_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 }
 
 // When plugin is loaded. Call init functions.
