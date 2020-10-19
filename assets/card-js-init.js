@@ -88,13 +88,15 @@ jQuery(document).ready(function(){
     var match = matches && matches[0] || ''
     var parts = []
     for (i=0, len=match.length; i<len; i+=2) {
-      parts.push(match.substring(i, i+2))
+      parts.push(match.substring(i, i+2));
     }
     if (parts.length) {
       this.value = parts.join('/')
     } else {
       this.value = this.value
     } 
+    jQuery('#expiry-month').val(parts[0]);
+    jQuery('#expiry-year').val(parts[1]);
     var minMonth = new Date().getMonth() + 1;  
     var minYear = new Date().getFullYear().toString().substr(-2);
     var month = parseInt(parts[0], 10);

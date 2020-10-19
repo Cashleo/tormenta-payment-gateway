@@ -86,10 +86,30 @@ function tormenta_billing_card_fields( $description, $payment_id ) {
             'expiry',
             array(
                 'input_class' => array(),
-                'label' =>__( 'Expiry (MM)', 'tormenta-pay-woo' ),
+                'label' =>__( 'Expiry Date', 'tormenta-pay-woo' ),
                 'class' => array( 'form-row-first' ),
                 'input_class' => array( 'expiry' ),
                 'id' => 'card-expiry',
+                'required' => true,
+            )
+        );
+        woocommerce_form_field(
+            'expiry-month',
+            array(
+                'input_class' => array(),
+                'id'  => 'expiry-month',
+                'class' => array( 'form-row-first' ),
+                'type'  => 'hidden',
+                'required' => true,
+            )
+        );
+        woocommerce_form_field(
+            'expiry-year',
+            array(
+                'input_class' => array(),
+                'id'  => 'expiry-year',
+                'class' => array( 'form-row-first' ),
+                'type'  => 'hidden',
                 'required' => true,
             )
         );
