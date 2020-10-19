@@ -58,51 +58,22 @@ jQuery(document).ready(function(){
     }
     var matches = card.match(/\d{4,16}/g);
     this.value = creditCardFormat(this.value, matches);
-    var luhn_checksum = valid_credit_card(this.value);
-    console.log(luhn_checksum);
-    if ( luhn_checksum == false ) {
-      if  (jQuery( 'form.woocommerce-checkout' ).hasClass('error-message') == false  ) {
-        jQuery('#card-number_field').append("<p class='error-message'>Please enter a valid card number</p>");
+    if ( this.value.length == 19) {
+      var luhn_checksum = valid_credit_card(this.value);
+      if( luhn_checksum == false ) {
+        if (jQuery( 'form.woocommerce-checkout' ).hasClass('error-message') == false || jQuery('.error-message').text() !== 'Please enter a valid card number' ) {
+            jQuery('#card-number_field').append("<p class='error-message'>Please enter a valid card number</p>");
+          
+        } 
       }
       
+    } else {
+      jQuery('error-message').remove();
     } 
     
   });
 
-function cgDateValidate(value) {
-  var currVal = value;
 
-  if (currVal === '') {
-      return false;
-  }
-
-  var rxDatePattern = /^(\d{1,2})(\/|-)(\d{1,2})(\/|-)(\d{4})$/;
-  var dtArray = currVal.match(rxDatePattern);
-
-  if (dtArray == null) {
-      return false;
-  }
-
-  // Check for dd/mm/yyyy format
-  var dtDay = dtArray[1],
-      dtMonth= dtArray[3],
-      dtYear = dtArray[5];
-
-  if (dtMonth < 1 || dtMonth > 12) {
-      return false;
-  } else if (dtDay < 1 || dtDay> 31) {
-      return false;
-  } else if ((dtMonth==4 || dtMonth==6 || dtMonth==9 || dtMonth==11) && dtDay ==31) {
-      return false;
-  } else if (dtMonth == 2) {
-      var isleap = (dtYear % 4 == 0 && (dtYear % 100 != 0 || dtYear % 400 == 0));
-      if (dtDay> 29 || (dtDay ==29 && !isleap)) {
-          return false;
-      }
-  }
-
-  return true;
-}
 
   jQuery( 'form.woocommerce-checkout' ).on('keyup', '#card-expiry', function() {
     var inputChar = String.fromCharCode(this.keyCode);
@@ -110,34 +81,43 @@ function cgDateValidate(value) {
     var allowedKeys = [8];
     if (allowedKeys.indexOf(code) !== -1) {
         return;
+    }   
+    var card = this.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+    var matches = card.match(/\d{2,4}/g)
+    
+    var match = matches && matches[0] || ''
+    var parts = []
+    for (i=0, len=match.length; i<len; i+=2) {
+      parts.push(match.substring(i, i+2))
     }
+    if (parts.length) {
+      this.value = parts.join('/')
+    } else {
+      this.value = this.value
+    } 
+    var minMonth = new Date().getMonth() + 1;  
+    var minYear = new Date().getFullYear().toString().substr(-2);
+    var month = parseInt(parts[0], 10);
+    var year = parseInt(parts[1], 10);
 
-    var expiry = this.value.replace(
-        /^([1-9]\/|[2-9])$/g, '0$1/' // 3 > 03/
-    ).replace(
-        /^(0[1-9]|1[0-2])$/g, '$1/' // 11 > 11/
-    ).replace(
-        /^([0-1])([3-9])$/g, '0$1/$2' // 13 > 01/3
-    ).replace(
-        /^(0?[1-9]|1[0-2])([0-9]{2})$/g, '$1/$2' // 141 > 01/41
-    ).replace(
-        /^([0]+)\/|[0]+$/g, '0' // 0/ > 0 and 00 > 0
-    ).replace(
-        /[^\d\/]|^[\/]*$/g, '' // To allow only digits and `/`
-    ).replace(
-        /\/\//g, '/' // Prevent entering more than 1 `/`
-    );
-    if (expiry.length > 5) {
-      return
-    }
-    cgDateValidate(expiry);
-    this.value = expiry;
+    if (year < minYear || (year === minYear && month < minMonth)){
+      jQuery('#card-expiry').append("<p class='error-message'>Please enter a valid expiry date</p>");
+
+    };  
   });
   
   jQuery( 'form.woocommerce-checkout' ).on('keyup', '#card-ccv', function() {
     var ccv = this.value.replace(/[^\d\/]|^[\/]*$/g, '');
-    if (ccv.val().length < 3 || ccv.val().length > 3) {
-      jQuery('#card-ccv').append("<p class='error-message'>Please enter a valid ccv</p>");;
+    var matches = ccv.match(/\d{3}/g);
+    var match = matches && matches[0] || ''
+    var parts = []
+    for (i=0, len=match.length; i<len; i+=1) {
+      parts.push(match.substring(i, i+1))
+    }
+    if (parts.length) {
+      this.value = parts.join('')
+    } else {
+      this.value = ccv
     }
 });
 });
