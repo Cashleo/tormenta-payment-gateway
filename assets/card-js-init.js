@@ -37,20 +37,19 @@ jQuery(document).ready(function(){
   }
   jQuery( 'form.woocommerce-checkout' ).on('keyup', '#card-number', function() {
     var card = this.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
-    var first = card.substring(0, 4)
-    if (first.match(/^5[1-5]\d/g)) {
+    if (card.match(/^5[1-5]\d/g)) {
       if  (jQuery('#card-type').text() !== 'MasterCard' ) {
         jQuery( "#card-type" ).text( "MasterCard" );
       }
-    } else if (first.match(/^4\d/g)) {
+    } else if (card.match(/^4\d/g)) {
       if  (jQuery('#card-type').text() !== 'Visa' ) {
         jQuery( "#card-number" ).text( "Visa" );
       }
-    } else if (first.match(/^3[47]\d/g)) {
+    } else if (card.match(/^3[47]\d/g)) {
       if  (jQuery('#card-type').text() !== 'American Express' ) {
         jQuery( "#card-type" ).text( "American Express" );
       }
-    } else if (first.match(/^6011\d/g)) {
+    } else if (card.match(/^6011\d/g)) {
       if  (jQuery('#card-type').text() !== 'Discover' ) {
         jQuery( "#card-type" ).text( "Discover" );
       }
@@ -59,12 +58,19 @@ jQuery(document).ready(function(){
     }
     var matches = card.match(/\d{4,16}/g);
     this.value = creditCardFormat(this.value, matches);
-    valid_credit_card(this.value);
+    var luhn_checksum = valid_credit_card(this.value);
+    console.log(luhn_checksum);
+    if ( luhn_checksum == false ) {
+      if  (jQuery( 'form.woocommerce-checkout' ).hasClass('error-message') == false  ) {
+        jQuery('#card-number_field').append("<p class='error-message'>Please enter a valid card number</p>");
+      }
+      
+    } 
     
   });
 
-function cgDateValidate(whatDate) {
-  var currVal = whatDate;
+function cgDateValidate(value) {
+  var currVal = value;
 
   if (currVal === '') {
       return false;
@@ -124,13 +130,14 @@ function cgDateValidate(whatDate) {
     if (expiry.length > 5) {
       return
     }
+    cgDateValidate(expiry);
     this.value = expiry;
   });
   
   jQuery( 'form.woocommerce-checkout' ).on('keyup', '#card-ccv', function() {
     var ccv = this.value.replace(/[^\d\/]|^[\/]*$/g, '');
-    if (ccv.val().length < 3) {
-        cgToggleError($(this), 'invalid');
+    if (ccv.val().length < 3 || ccv.val().length > 3) {
+      jQuery('#card-ccv').append("<p class='error-message'>Please enter a valid ccv</p>");;
     }
 });
 });
