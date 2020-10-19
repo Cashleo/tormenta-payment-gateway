@@ -4,3 +4,9 @@
     background-position: center 30% !important;
     background-repeat: no-repeat !important;
 }
+.woocommerce-checkout .woocommerce-input-wrapper {
+    width: 30%;
+}
+.woocommerce-checkout label {
+    width: 20%;
+}
