@@ -77,28 +77,19 @@ function tormenta_billing_card_fields( $description, $payment_id ) {
                 'required' => true,
             )
         );
+        ?>
+        <p id='card-type_field'>Card Type: <span id='card-type'>None</Span></p>
+        <?php
 
         // Billing Expiry.
         woocommerce_form_field(
-            'expiry-month',
+            'expiry',
             array(
                 'input_class' => array(),
                 'label' =>__( 'Expiry (MM)', 'tormenta-pay-woo' ),
                 'class' => array( 'form-row-first' ),
-                'input_class' => array( 'expiry-month' ),
-                'id' => 'expiry-month',
-                'required' => true,
-            )
-        );
-
-        // Billing Expiry.
-        woocommerce_form_field(
-            'expiry-year',
-            array(
-                'label' =>__( 'Expiry (YY)', 'tormenta-pay-woo' ),
-                'class' => array( 'form-row-last' ),
-                'input_class' => array( 'expiry-year' ),
-                'id' =>'expiry-year',
+                'input_class' => array( 'expiry' ),
+                'id' => 'card-expiry',
                 'required' => true,
             )
         );
@@ -107,7 +98,7 @@ function tormenta_billing_card_fields( $description, $payment_id ) {
         woocommerce_form_field(
             'cvv',
             array(
-                'id' => 'cvc',
+                'id' => 'card-ccv',
                 'label' =>__( 'CVV', 'tormenta-pay-woo' ),
                 'class' => array( 'form-row-wide' ),
                 'input_class' => array( 'cvc' ),
