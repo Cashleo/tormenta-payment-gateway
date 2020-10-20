@@ -14,6 +14,9 @@
 .woocommerce-checkout .woocommerce-input-wrapper .input-text {
     height: 40px;
 }
+.woocommerce-checkout #card-type_field {
+    visibility: hidden;
+}
 .woocommerce-checkout #card-number_field .woocommerce-input-wrapper img {
     position: absolute !important;
     right: 5px;
