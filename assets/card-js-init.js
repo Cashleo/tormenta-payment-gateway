@@ -15,65 +15,38 @@ jQuery(document).ready(function(){
     }
   }
 
-  function valid_credit_card(value) {
-    // Accept only digits, dashes or spaces
-    if (/[^0-9-\s]+/.test(value)) return false;
-  
-    // The Luhn Algorithm. It's so pretty.
-    let nCheck = 0, bEven = false;
-    value = value.replace(/\D/g, "");
-  
-    for (var n = value.length - 1; n >= 0; n--) {
-      var cDigit = value.charAt(n),
-          nDigit = parseInt(cDigit, 10);
-  
-      if (bEven && (nDigit *= 2) > 9) nDigit -= 9;
-  
-      nCheck += nDigit;
-      bEven = !bEven;
-    }
-  
-    return (nCheck % 10) == 0;
-  }
   jQuery( 'form.woocommerce-checkout' ).on('keyup', '#card-number', function() {
     var card = this.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+    var image_path = credit_cards.image_path;
     if (card.match(/^5[1-5]\d/g)) {
       if  (jQuery('#card-type').text() !== 'MasterCard' ) {
+        jQuery('input#card-number').after("<img src='" + image_path + "master-card.png'/>");
         jQuery( "#card-type" ).text( "MasterCard" );
       }
     } else if (card.match(/^4\d/g)) {
       if  (jQuery('#card-type').text() !== 'Visa' ) {
-        jQuery( "#card-number" ).text( "Visa" );
+        jQuery( "#card-type" ).text( "Visa" );
+        jQuery('input#card-number').after("<img src='" + image_path + "visa-card.png'/>");
       }
     } else if (card.match(/^3[47]\d/g)) {
       if  (jQuery('#card-type').text() !== 'American Express' ) {
         jQuery( "#card-type" ).text( "American Express" );
+        jQuery('input#card-number').after("<img src='" + image_path + "american_express.png'/>");
       }
     } else if (card.match(/^6011\d/g)) {
       if  (jQuery('#card-type').text() !== 'Discover' ) {
         jQuery( "#card-type" ).text( "Discover" );
+        jQuery('input#card-number').after("<img src='" + image_path + "discover-card.png'/>");
       }
     } else {
         jQuery( "#card-type" ).text( "None" );
+        jQuery('input#card-number').next("img").remove();
     }
     var matches = card.match(/\d{4,16}/g);
+  
     this.value = creditCardFormat(this.value, matches);
-    if ( this.value.length == 19) {
-      var luhn_checksum = valid_credit_card(this.value);
-      if( luhn_checksum == false ) {
-        if (jQuery( 'form.woocommerce-checkout' ).hasClass('error-message') == false || jQuery('.error-message').text() !== 'Please enter a valid card number' ) {
-            jQuery('#card-number_field').append("<p class='error-message'>Please enter a valid card number</p>");
-          
-        } 
-      }
-      
-    } else {
-      jQuery('error-message').remove();
-    } 
     
   });
-
-
 
   jQuery( 'form.woocommerce-checkout' ).on('keyup', '#card-expiry', function() {
     var inputChar = String.fromCharCode(this.keyCode);
@@ -88,13 +61,15 @@ jQuery(document).ready(function(){
     var match = matches && matches[0] || ''
     var parts = []
     for (i=0, len=match.length; i<len; i+=2) {
-      parts.push(match.substring(i, i+2))
+      parts.push(match.substring(i, i+2));
     }
     if (parts.length) {
       this.value = parts.join('/')
     } else {
       this.value = this.value
     } 
+    jQuery('#expiry-monthpoew').val(parts[0]);
+    jQuery('#expiry-year').val(parts[1]);
     var minMonth = new Date().getMonth() + 1;  
     var minYear = new Date().getFullYear().toString().substr(-2);
     var month = parseInt(parts[0], 10);
