@@ -6,7 +6,18 @@
 }
 .woocommerce-checkout .woocommerce-input-wrapper {
     width: 30%;
+    position: relative;
 }
 .woocommerce-checkout label {
     width: 20%;
+}
+.woocommerce-checkout .woocommerce-input-wrapper .input-text {
+    height: 40px;
+}
+.woocommerce-checkout #card-number_field .woocommerce-input-wrapper img {
+    position: absolute !important;
+    right: 5px;
+    top: 5px;
+    width: 20%;
+    height: 35px;
 }
