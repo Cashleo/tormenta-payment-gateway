@@ -23,7 +23,7 @@
     position: absolute !important;
     right: 10px;
     top: 10px;
-	width: 20px;
+	width: 30px;
 }
 #card-number_field {
     padding-top: 0 !important;
@@ -33,5 +33,5 @@
     position: absolute;
     top: 5px;
     left: 10px;
-    font-size: 30px;
+    font-size: 20px;
 }
