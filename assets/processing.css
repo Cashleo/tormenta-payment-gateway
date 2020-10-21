@@ -5,18 +5,33 @@
     background-repeat: no-repeat !important;
 }
 .woocommerce-checkout .woocommerce-input-wrapper {
-    width: 30%;
+    width: 40%;
     position: relative;
+    line-height: 0;
+}
+.woocommerce-checkout label {
+    width: 20%;
 }
 .woocommerce-checkout .woocommerce-input-wrapper .input-text {
     height: 40px;
+    padding-left: 50px !important;
 }
 .woocommerce-checkout #card-type_field {
     visibility: hidden;
 }
 .woocommerce-checkout #card-number_field .woocommerce-input-wrapper img {
     position: absolute !important;
-    right: 20px;
-    top: -5px;
+    right: 10px;
+    top: 5px;
 	width: 30px;
+}
+#card-number_field {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+.woocommerce-checkout .far, .woocommerce-checkout .fas {
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    font-size: 30px;
 }
