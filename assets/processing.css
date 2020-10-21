@@ -22,7 +22,7 @@
 .woocommerce-checkout #card-number_field .woocommerce-input-wrapper img {
     position: absolute !important;
     right: 10px;
-    top: 10px;
+    top: 5px;
 	width: 30px;
 }
 #card-number_field {
@@ -31,7 +31,7 @@
 }
 .woocommerce-checkout .far, .woocommerce-checkout .fas {
     position: absolute;
-    top: 5px;
+    top: 10px;
     left: 10px;
     font-size: 20px;
 }
