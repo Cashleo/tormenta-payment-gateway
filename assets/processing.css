@@ -14,7 +14,7 @@
 }
 .woocommerce-checkout .woocommerce-input-wrapper .input-text {
     height: 40px;
-    padding-left: 30px !important;
+    padding-left: 40px !important;
 }
 .woocommerce-checkout #card-type_field {
     visibility: hidden;
