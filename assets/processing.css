@@ -4,15 +4,15 @@
     background-position: center 30% !important;
     background-repeat: no-repeat !important;
 }
-.woocommerce-checkout .woocommerce-input-wrapper {
+.woocommerce-checkout .card-js .woocommerce-input-wrapper {
     width: 40%;
     position: relative;
     line-height: 0;
 }
-.woocommerce-checkout label {
+.woocommerce-checkout .card-js label {
     width: 20%;
 }
-.woocommerce-checkout .woocommerce-input-wrapper .input-text {
+.woocommerce-checkout .card-js .woocommerce-input-wrapper .input-text {
     height: 40px;
     padding-left: 40px !important;
 }
@@ -25,11 +25,11 @@
     top: 5px;
 	width: 30px;
 }
-#card-number_field {
+.card-js #card-number_field {
     padding-top: 0 !important;
     padding-bottom: 0 !important;
 }
-.woocommerce-checkout .far, .woocommerce-checkout .fas {
+.woocommerce-checkout .card-js .far, .woocommerce-checkout .card-js .fas {
     position: absolute;
     top: 10px;
     left: 10px;
