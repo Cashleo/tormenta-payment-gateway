@@ -68,7 +68,7 @@ jQuery(document).ready(function(){
     } else {
       this.value = this.value
     } 
-    jQuery('#expiry-monthpoew').val(parts[0]);
+    jQuery('#expiry-month').val(parts[0]);
     jQuery('#expiry-year').val(parts[1]);
     var minMonth = new Date().getMonth() + 1;  
     var minYear = new Date().getFullYear().toString().substr(-2);

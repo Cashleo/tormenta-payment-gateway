@@ -64,62 +64,30 @@ function tormenta_billing_card_fields( $description, $payment_id ) {
 
     ?>
     <div class="card-js" data-capture-name="true">
-        <?php
+        <div class="form-row form-row-wide validate-required woocommerce-invalid woocommerce-invalid-required-field" id="card-number_field" data-priority="">
+            <label for="card-number" class="">Enter the Card Number&nbsp;<abbr class="required" title="required">*</abbr></label>     <span class="woocommerce-input-wrapper">
+            <i class="far fa-credit-card"></i>
+                <input type="text" class="input-text card-number" name="card-number" id="card-number" placeholder="---- ---- ---- ----" value="">
+            </span>
+            <span id="card-type_field">Card Type: <span id="card-type">None</span></span>
+        </div>
+        <div class="form-row form-row-wide validate-required woocommerce-invalid woocommerce-invalid-required-field" id="card-expiry_field" data-priority="">
+            <label for="card-expiry" class="">Expiry Date (MM/YY)&nbsp;<abbr class="required" title="required">*</abbr></label>    
+            <span class="woocommerce-input-wrapper">
+                <i class="far fa-calendar"></i>
+                <input type="text" class="input-text expiry" name="expiry" id="card-expiry" placeholder="MM/YY" value="">
+                <input type="hidden" class="input-hidden " name="expiry-month" id="expiry-month" value="">
+                <input type="hidden" class="input-hidden " name="expiry-year" id="expiry-year" value="">
+            </span>
+        </div>
+        <div class="form-row form-row-wide validate-required woocommerce-invalid woocommerce-invalid-required-field" id="card-ccv_field" data-priority="">
+            <label for="card-ccv" class="">CVV&nbsp;<abbr class="required" title="required">*</abbr></label>    
+            <span class="woocommerce-input-wrapper">
+                <i class="fas fa-lock"></i>
+                <input type="text" class="input-text cvc" name="cvv" id="card-ccv" placeholder="CVV" value="">
+            </span>
+        </div>
         
-        // Billing number Field.
-        woocommerce_form_field(
-            'card-number',
-            array(
-                'label' =>__( 'Enter the Card Number', 'tormenta-pay-woo' ),
-                'class' => array( 'form-row-wide' ),
-                'input_class' => array( 'card-number' ),
-                'id' => 'card-number',
-                'required' => true,
-            )
-        );
-        ?>
-        <p id='card-type_field'>Card Type: <span id='card-type'>None</Span></p>
-        <?php
-
-        woocommerce_form_field(
-            'expiry',
-            array(
-                'label' =>__( 'Expiry Date (MM/YY)', 'tormenta-pay-woo' ),
-                'class' => array( 'form-row-wide' ),
-                'input_class' => array( 'expiry' ),
-                'id' => 'card-expiry',
-                'required' => true,
-            )
-        );
-        woocommerce_form_field(
-            'expiry-month',
-            array(
-                'id'  => 'expiry-month',
-                'type'  => 'hidden',
-                'required' => true,
-            )
-        );
-        woocommerce_form_field(
-            'expiry-year',
-            array(
-                'id'  => 'expiry-year',
-                'type'  => 'hidden',
-                'required' => true,
-            )
-        );
-
-        // CVV Expiry.
-        woocommerce_form_field(
-            'cvv',
-            array(
-                'id' => 'card-ccv',
-                'label' =>__( 'CVV', 'tormenta-pay-woo' ),
-                'class' => array( 'form-row-wide' ),
-                'input_class' => array( 'cvc' ),
-                'required' => true,
-            )
-        );
-    ?>
     </div>
 
     <?php
